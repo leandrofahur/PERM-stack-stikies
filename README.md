@@ -1,6 +1,8 @@
 # STIKY NOTES
 
-<iframe src="https://giphy.com/embed/EIiJp9cQ3GeEU" width="480" height="480" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/please-construction-patient-EIiJp9cQ3GeEU">via GIPHY</a></p>
+<h1 align="center">
+    <img src="https://media.giphy.com/media/EIiJp9cQ3GeEU/giphy.gif" />
+<h1>
 
 <!-- ## OBJECTIVES
 
