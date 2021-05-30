@@ -33,21 +33,36 @@ const NoteList = () => {
 
   const renderCards = cards.map((card) => {
     return (
-      <div className="ui card" key={card.id}>
+      <div
+        className="ui card"
+        key={card.id}
+        style={{ backgroundColor: "beige" }}
+      >
         <div className="content">
+          <img
+            class="right floated mini circular ui image"
+            src="/images/profile.png"
+          />{" "}
+          <div className="header">Leandro M.</div>
+          <div className="meta">{Date(card.createdAt).substr(4, 11)}</div>
           <div
             className="description"
-            style={{ paddding: "10px", textAlign: "justify" }}
+            style={{ paddingTop: "10px", textAlign: "justify" }}
           >
             {card.content}
           </div>
         </div>
         <div className="extra content">
-          <div className="right floated author">
-            <img className="ui avatar image" src="/images/profile.png" />{" "}
-            Leandro
+          <div className="right floated">
+            <div class="ui compact labeled brown icon button">
+              <i class="edit icon"></i>
+              Edit
+            </div>
+            <div class="ui compact labeled red icon button">
+              <i class="delete icon"></i>
+              Delete
+            </div>
           </div>
-          <div className="left floated author">{card.createdAt}</div>
         </div>
       </div>
     );
@@ -63,3 +78,32 @@ const NoteList = () => {
 };
 
 export default NoteList;
+
+// const renderCards = cards.map((card) => {
+//   return (
+//     <div className="ui card" key={card.id}>
+//       <div className="content">
+//         <div className="header">Note to self</div>
+//         <div className="meta">
+//           <span className="category">
+//             {Date(card.createdAt).substr(4, 11)}
+//           </span>
+//         </div>
+//         <div
+//           className="description"
+//           style={{ textAlign: "justify", padding: "7px" }}
+//         >
+//           {card.content}
+//         </div>
+//       </div>
+//       <div className="extra content">
+//         <div className="right floated author">
+//           <img className="ui avatar image" src="/images/profile.png" />{" "}
+//           Leandro
+//         </div>
+//         <div className="left floated author">Badge</div>
+//       </div>
+//       <div className="ui bottom attached button">Edit</div>
+//     </div>
+//   );
+// });

@@ -3,10 +3,10 @@ import React, { useState } from "react";
 const NoteInput = () => {
   const [content, setContent] = useState("");
 
-  const onSubmitForm = async (evt) => {
+  const onSubmitAdd = async (evt) => {
     evt.preventDefault();
     const body = { content };
-    console.log(body);
+
     try {
       const response = await fetch("http://localhost:5000/notes", {
         headers: { "Content-Type": "application/json" },
@@ -20,6 +20,24 @@ const NoteInput = () => {
     }
   };
 
+  const onSubmitDeleteAll = async (evt) => {
+    evt.preventDefault();
+    try {
+      const response = await fetch("http://localhost:5000/notes/all", {
+        method: "DELETE",
+      });
+      setContent("");
+      window.location = "/";
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
+
+  const onSubmitClear = async (evt) => {
+    evt.preventDefault();
+    setContent("");
+  };
+
   return (
     <>
       <div className="ui inverted segment" style={{ marginTop: "40px" }}>
@@ -27,19 +45,41 @@ const NoteInput = () => {
           Stiky Notes App
         </h1>
         <form className="ui inverted form" style={{ padding: "30px" }}>
-          <div className="ui fluid action input">
-            <input
+          <div className="field">
+            <textarea
+              rows="2"
               placeholder="Write yourself a note"
               type="text"
               value={content}
               onChange={(evt) => setContent(evt.target.value)}
-            ></input>
-            <button
-              className="ui positive button"
-              onClick={(evt) => onSubmitForm(evt)}
+            ></textarea>
+          </div>
+          <div className="field">
+            <input />
+          </div>
+          <div style={{ textAlign: "end" }}>
+            <div
+              class="ui compact labeled green icon button"
+              onClick={(evt) => onSubmitAdd(evt)}
             >
+              {" "}
+              <i class="check circle outline icon"></i>
               Add
-            </button>
+            </div>
+            <div
+              class="ui compact labeled yellow icon button"
+              onClick={(evt) => onSubmitClear(evt)}
+            >
+              <i class="eraser icon"></i>
+              Clear
+            </div>
+            <div
+              class="ui compact labeled red icon button"
+              onClick={(evt) => onSubmitDeleteAll(evt)}
+            >
+              <i class="trash alternate outline icon"></i>
+              Delete All
+            </div>
           </div>
         </form>
       </div>
