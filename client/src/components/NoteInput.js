@@ -54,13 +54,14 @@ const NoteInput = () => {
               onChange={(evt) => setContent(evt.target.value)}
             ></textarea>
           </div>
-          <div className="field">
+          {/* <div className="field">
             <input />
-          </div>
-          <div style={{ textAlign: "end" }}>
+          </div> */}
+          <div style={{ textAlign: "end", paddingTop: "5px" }}>
             <div
               className="ui compact labeled green icon button"
               onClick={(evt) => onSubmitAdd(evt)}
+              style={{ marginRight: "7px" }}
             >
               {" "}
               <i className="check circle outline icon"></i>
@@ -69,6 +70,7 @@ const NoteInput = () => {
             <div
               className="ui compact labeled yellow icon button"
               onClick={(evt) => onSubmitClear(evt)}
+              style={{ marginRight: "7px" }}
             >
               <i className="eraser icon"></i>
               Clear
@@ -76,6 +78,7 @@ const NoteInput = () => {
             <div
               className="ui compact labeled red icon button"
               onClick={(evt) => onSubmitDeleteAll(evt)}
+              style={{ marginRight: "7px" }}
             >
               <i className="trash alternate outline icon"></i>
               Delete All

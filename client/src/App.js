@@ -2,7 +2,6 @@ import React from "react";
 
 import NoteInput from "./components/NoteInput";
 import NoteList from "./components/NoteList";
-import NoteEdit from "./components/NoteEdit";
 
 const App = () => {
   return (
@@ -10,7 +9,6 @@ const App = () => {
       <div className="ui container">
         <NoteInput />
         <NoteList />
-        {/* <NoteEdit /> */}
       </div>
     </>
   );

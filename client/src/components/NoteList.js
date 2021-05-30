@@ -1,8 +1,28 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
+// import NoteEdit from "./NoteEdit";
 
 const NoteList = () => {
   const [width, setWidth] = useState(window.innerWidth);
   const [cards, setCards] = useState([]);
+  const [editNote, setEditNote] = useState(false);
+  const [content, setContent] = useState("");
+
+  const updateContent = async (evt, id) => {
+    evt.preventDefault();
+    const body = { content };
+    try {
+      const body = { content };
+      console.log(body);
+      const response = await fetch(`http://localhost:5000/notes/${id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
+      window.location = "/";
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
 
   const getNotes = async () => {
     try {
@@ -12,6 +32,11 @@ const NoteList = () => {
     } catch (error) {
       console.error(error.message);
     }
+  };
+
+  const onEditNote = (content) => {
+    setEditNote(!editNote);
+    setContent(content);
   };
 
   // use Effect to keep track of the browser window width:
@@ -57,27 +82,58 @@ const NoteList = () => {
           />{" "}
           <div className="header">Lê</div>
           <div className="meta">{Date(card.createdAt).substr(4, 11)}</div>
-          <div
-            className="description"
-            style={{ paddingTop: "10px", textAlign: "justify" }}
-          >
-            {card.content}
-          </div>
+          {editNote ? (
+            <div className="ui fluid icon input">
+              <input
+                type="text"
+                value={content}
+                onChange={(evt) => setContent(evt.target.value)}
+              />
+            </div>
+          ) : (
+            <div
+              className="description"
+              style={{ paddingTop: "10px", textAlign: "justify" }}
+            >
+              {card.content}
+            </div>
+          )}
         </div>
         <div className="extra content">
-          <div className="right floated">
-            <div className="ui compact labeled brown icon button">
-              <i className="edit icon"></i>
-              Edit
+          {editNote ? (
+            <div className="right floated">
+              <div
+                className="ui compact labeled positive icon button"
+                onClick={(evt) => updateContent(evt, card.id)}
+              >
+                <i className="edit icon"></i>
+                Save
+              </div>
+              <div className="ui compact labeled red icon button">
+                <i className="delete icon"></i>
+                Cancel
+              </div>
             </div>
-            <div
-              className="ui compact labeled red icon button"
-              onClick={(evt) => onDeleteNote(evt, card.id)}
-            >
-              <i className="delete icon"></i>
-              Delete
+          ) : (
+            <div className="right floated">
+              <div
+                className="ui compact labeled brown icon button"
+                onClick={() => {
+                  onEditNote(card.content);
+                }}
+              >
+                <i className="edit icon"></i>
+                Edit
+              </div>
+              <div
+                className="ui compact labeled red icon button"
+                onClick={(evt) => onDeleteNote(evt, card.id)}
+              >
+                <i className="delete icon"></i>
+                Delete
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
     );
@@ -96,32 +152,3 @@ const NoteList = () => {
 };
 
 export default NoteList;
-
-// const renderCards = cards.map((card) => {
-//   return (
-//     <div className="ui card" key={card.id}>
-//       <div className="content">
-//         <div className="header">Note to self</div>
-//         <div className="meta">
-//           <span className="category">
-//             {Date(card.createdAt).substr(4, 11)}
-//           </span>
-//         </div>
-//         <div
-//           className="description"
-//           style={{ textAlign: "justify", padding: "7px" }}
-//         >
-//           {card.content}
-//         </div>
-//       </div>
-//       <div className="extra content">
-//         <div className="right floated author">
-//           <img className="ui avatar image" src="/images/profile.png" />{" "}
-//           Leandro
-//         </div>
-//         <div className="left floated author">Badge</div>
-//       </div>
-//       <div className="ui bottom attached button">Edit</div>
-//     </div>
-//   );
-// });
