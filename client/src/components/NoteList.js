@@ -6,6 +6,7 @@ const NoteList = () => {
   const [cards, setCards] = useState([]);
   const [editNote, setEditNote] = useState(false);
   const [content, setContent] = useState("");
+  const [id, setId] = useState(0);
 
   const updateContent = async (evt, id) => {
     evt.preventDefault();
@@ -34,9 +35,10 @@ const NoteList = () => {
     }
   };
 
-  const onEditNote = (content) => {
+  const onEditNote = (card) => {
     setEditNote(!editNote);
-    setContent(content);
+    setContent(card.content);
+    setId(card.id);
   };
 
   // use Effect to keep track of the browser window width:
@@ -82,7 +84,7 @@ const NoteList = () => {
           />{" "}
           <div className="header">Lê</div>
           <div className="meta">{Date(card.createdAt).substr(4, 11)}</div>
-          {editNote ? (
+          {editNote && id === card.id ? (
             <div className="ui fluid icon input">
               <input
                 type="text"
@@ -100,7 +102,7 @@ const NoteList = () => {
           )}
         </div>
         <div className="extra content">
-          {editNote ? (
+          {editNote && id === card.id ? (
             <div className="right floated">
               <div
                 className="ui compact labeled positive icon button"
@@ -119,7 +121,7 @@ const NoteList = () => {
               <div
                 className="ui compact labeled brown icon button"
                 onClick={() => {
-                  onEditNote(card.content);
+                  onEditNote(card);
                 }}
               >
                 <i className="edit icon"></i>
