@@ -59,25 +59,25 @@ const NoteInput = () => {
           </div>
           <div style={{ textAlign: "end" }}>
             <div
-              class="ui compact labeled green icon button"
+              className="ui compact labeled green icon button"
               onClick={(evt) => onSubmitAdd(evt)}
             >
               {" "}
-              <i class="check circle outline icon"></i>
+              <i className="check circle outline icon"></i>
               Add
             </div>
             <div
-              class="ui compact labeled yellow icon button"
+              className="ui compact labeled yellow icon button"
               onClick={(evt) => onSubmitClear(evt)}
             >
-              <i class="eraser icon"></i>
+              <i className="eraser icon"></i>
               Clear
             </div>
             <div
-              class="ui compact labeled red icon button"
+              className="ui compact labeled red icon button"
               onClick={(evt) => onSubmitDeleteAll(evt)}
             >
-              <i class="trash alternate outline icon"></i>
+              <i className="trash alternate outline icon"></i>
               Delete All
             </div>
           </div>

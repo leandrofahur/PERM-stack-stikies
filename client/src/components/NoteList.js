@@ -31,6 +31,18 @@ const NoteList = () => {
     getNotes();
   }, []);
 
+  const onDeleteNote = async (evt, id) => {
+    evt.preventDefault();
+    try {
+      const response = await fetch(`http://localhost:5000/notes/${id}`, {
+        method: "DELETE",
+      });
+      window.location = "/";
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
+
   const renderCards = cards.map((card) => {
     return (
       <div
@@ -40,10 +52,10 @@ const NoteList = () => {
       >
         <div className="content">
           <img
-            class="right floated mini circular ui image"
+            className="right floated mini circular ui image"
             src="/images/profile.png"
           />{" "}
-          <div className="header">Leandro M.</div>
+          <div className="header">Lê</div>
           <div className="meta">{Date(card.createdAt).substr(4, 11)}</div>
           <div
             className="description"
@@ -54,12 +66,15 @@ const NoteList = () => {
         </div>
         <div className="extra content">
           <div className="right floated">
-            <div class="ui compact labeled brown icon button">
-              <i class="edit icon"></i>
+            <div className="ui compact labeled brown icon button">
+              <i className="edit icon"></i>
               Edit
             </div>
-            <div class="ui compact labeled red icon button">
-              <i class="delete icon"></i>
+            <div
+              className="ui compact labeled red icon button"
+              onClick={(evt) => onDeleteNote(evt, card.id)}
+            >
+              <i className="delete icon"></i>
               Delete
             </div>
           </div>
@@ -70,7 +85,10 @@ const NoteList = () => {
 
   return (
     <>
-      <div className={`ui ${width > 980 ? "three" : "two"} stackable cards`}>
+      <div
+        className={`ui ${width > 980 ? "three" : "two"} stackable cards`}
+        style={{ paddingTop: "10px" }}
+      >
         {renderCards}
       </div>
     </>
