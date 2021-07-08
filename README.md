@@ -18,7 +18,7 @@
 <br/> -->
 
 <h2>🎯 <strong>Objective</strong></h2>
-<p>This repository intends to explore the <strong>S.O.L.I.D</strong> principles applied into a basic Node.js REST API with Typescript.</p>
+<p>This repository intends to implement a stiky note application to the household.</p>
 <br/>
 
 <!-- <h2>🔍 <strong>S.O.L.I.D</strong></h2>
