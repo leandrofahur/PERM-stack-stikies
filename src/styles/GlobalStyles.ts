@@ -4,7 +4,13 @@ export default createGlobalStyle`
   :root {
     --black: #000000;    
     --white: #ffffff;
+    
     --dark-gray: #333333;
+    --gray: #666666;
+    --light-gray: #aaaaaa;
+
+    --dark-yellow: #ffed2b;
+    --yellow: #fff8a7;
   }
   * {
     margin: 0;
