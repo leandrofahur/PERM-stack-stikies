@@ -22,7 +22,7 @@ const Note: React.FC = (props: TextAreaProps) => {
       drag
     >
       <Menu>
-        <Button onClick={(event) => console.log('clicked!')}>
+        <Button>
           <CloseIcon />
         </Button>
       </Menu>
